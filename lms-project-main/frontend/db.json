@@ -1,0 +1,135 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "Admin",
+      "name": "Admin User"
+    },
+    {
+      "id": "2",
+      "email": "instructor1@example.com",
+      "password": "teach123",
+      "role": "Instructor",
+      "name": "John Smith"
+    },
+    {
+      "id": "3",
+      "email": "instructor2@example.com",
+      "password": "teach123",
+      "role": "Instructor",
+      "name": "Sara Lee"
+    },
+    {
+      "id": "4",
+      "email": "student1@example.com",
+      "password": "student123",
+      "role": "Student",
+      "name": "Ali Ahmad"
+    },
+    {
+      "id": "5",
+      "email": "student2@example.com",
+      "password": "student123",
+      "role": "Student",
+      "name": "Lina Khaled"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "title": "Java Basics",
+      "description": "Learn Java programming fundamentals.",
+      "instructorId": 2
+    },
+    {
+      "id": "2",
+      "title": "Web Development with React",
+      "description": "Build web apps using React and hooks.",
+      "instructorId": 3
+    },
+    {
+      "id": "3",
+      "title": "Database Management with MySQL",
+      "description": "Design and query MySQL databases.",
+      "instructorId": 2
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "1",
+      "courseId": 1,
+      "studentId": 4,
+      "progress": 50
+    },
+    {
+      "id": "2",
+      "courseId": 1,
+      "studentId": 5,
+      "progress": 20
+    },
+    {
+      "id": "3",
+      "courseId": 2,
+      "studentId": 4,
+      "progress": 80
+    },
+    {
+      "id": "4",
+      "courseId": 3,
+      "studentId": 5,
+      "progress": 0
+    }
+  ],
+  "lectures": [
+    {
+      "id": "1",
+      "courseId": 1,
+      "title": "Introduction to Java",
+      "type": "video",
+      "url": "https://example.com/java-intro.mp4"
+    },
+    {
+      "id": "2",
+      "courseId": 1,
+      "title": "Java Variables",
+      "type": "pdf",
+      "url": "https://example.com/java-variables.pdf"
+    },
+    {
+      "id": "3",
+      "courseId": 2,
+      "title": "React Basics",
+      "type": "video",
+      "url": "https://example.com/react-basics.mp4"
+    },
+    {
+      "id": "4",
+      "courseId": 3,
+      "title": "MySQL Fundamentals",
+      "type": "video",
+      "url": "https://example.com/mysql-fundamentals.mp4"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "1",
+      "courseId": 1,
+      "questions": [
+        "What is Java?",
+        "Explain the difference between primitive and reference data types.",
+        "What is the purpose of the main() method?"
+      ]
+    },
+    {
+      "id": "3",
+      "courseId": 3,
+      "questions": [
+        "What is a primary key in MySQL?",
+        "Explain the difference between INNER JOIN and LEFT JOIN.",
+        "What is the purpose of indexes in a database?"
+      ]
+    }
+  ]
+}
