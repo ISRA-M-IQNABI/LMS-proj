@@ -12,7 +12,9 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:3001/users?email=${email}&password=${password}`);
+      const res = await fetch(
+        `http://localhost:3001/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+      );
       const data = await res.json();
 
       if (Array.isArray(data) && data.length > 0) {
@@ -37,80 +39,110 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Something went wrong.");
+      alert("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="w-screen h-screen flex">
-      {/* Left side */}
-      <div className="w-1/2 bg-blue-600 text-white flex flex-col justify-center items-center p-10">
-        <h1 className="text-4xl font-bold mb-4">PPU E-Class</h1>
-        <p className="text-lg text-center max-w-md">
-          Welcome back! Log in to access your courses, manage your dashboard, and stay connected with your academic journey.
-        </p>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-          alt="Login Illustration"
-          className="w-48 mt-8"
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-r from-indigo-700 via-purple-800 to-pink-700 flex items-center justify-center px-4">
+      <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-10 transform transition-transform hover:scale-[1.02] duration-300">
+        <div className="flex flex-col items-center mb-10">
+          {/* أيقونة تعليم أنيقة */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-20 w-20 text-purple-700 animate-pulse"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.8}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 14l9-5-9-5-9 5 9 5z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 14l6.16-3.422a12.083 12.083 0 01.84 4.258c0 2.485-2.239 4.5-5 4.5s-5-2.015-5-4.5a12.083 12.083 0 01.84-4.258L12 14z"
+            />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 14v7" />
+          </svg>
 
-      {/* Right side */}
-      <div className="w-1/2 flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-10 rounded shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login to Your Account</h2>
-          <form onSubmit={handleLogin}>
-            <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-400"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className={`w-full py-2 px-4 rounded transition duration-200 ${
-                loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 text-white"
-              }`}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
-          </form>
-          <p className="mt-4 text-center text-sm text-gray-600">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-600 hover:underline">
-              Create one
-            </Link>
+          <h2 className="mt-5 text-4xl font-extrabold text-gray-900 tracking-wide">
+            Welcome Back
+          </h2>
+          <p className="mt-3 text-gray-600 text-center max-w-xs font-medium">
+            Log in to your PPU E-Class account and continue your learning journey.
           </p>
         </div>
+
+        <form onSubmit={handleLogin} className="space-y-7">
+          <div className="relative">
+            <input
+              id="email"
+              type="email"
+              required
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder=" "
+              className="peer w-full px-5 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-purple-400 transition"
+            />
+            <label
+              htmlFor="email"
+              className="absolute left-5 top-3 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-purple-700 cursor-text"
+            >
+              Email Address
+            </label>
+          </div>
+
+          <div className="relative">
+            <input
+              id="password"
+              type="password"
+              required
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder=" "
+              className="peer w-full px-5 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-purple-400 transition"
+            />
+            <label
+              htmlFor="password"
+              className="absolute left-5 top-3 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-purple-700 cursor-text"
+            >
+              Password
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-3 rounded-xl font-semibold text-white shadow-lg transition duration-300 transform ${
+              loading
+                ? "bg-purple-400 cursor-not-allowed"
+                : "bg-purple-700 hover:bg-purple-800 hover:scale-105"
+            }`}
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
+
+        <p className="mt-8 text-center text-gray-700 font-medium">
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className="text-purple-700 font-bold hover:text-purple-900 transition-colors"
+          >
+            Create one
+          </Link>
+        </p>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Login.jsx;

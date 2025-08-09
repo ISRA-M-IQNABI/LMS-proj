@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -17,14 +17,14 @@ const Signup = () => {
       username,
       email,
       password,
-      role
+      role,
     };
 
     try {
       const res = await fetch("http://localhost:3001/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser)
+        body: JSON.stringify(newUser),
       });
 
       if (res.ok) {
@@ -35,7 +35,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.error("Signup error:", error);
-      alert("Something went wrong.");
+      alert("Something went wrong. Please try again later.");
     }
   };
 
@@ -57,10 +57,14 @@ const Signup = () => {
       {/* Right side */}
       <div className="w-1/2 flex items-center justify-center bg-gray-100">
         <div className="bg-white p-10 rounded shadow-md w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Create Your Account</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+            Create Your Account
+          </h2>
           <form onSubmit={handleSignup}>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                Full Name
+              </label>
               <input
                 type="text"
                 id="name"
@@ -68,10 +72,13 @@ const Signup = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
+                autoComplete="name"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                Username
+              </label>
               <input
                 type="text"
                 id="username"
@@ -79,10 +86,13 @@ const Signup = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                autoComplete="username"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
               <input
                 type="email"
                 id="email"
@@ -90,10 +100,13 @@ const Signup = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="email"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
               <input
                 type="password"
                 id="password"
@@ -101,10 +114,13 @@ const Signup = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoComplete="new-password"
               />
             </div>
             <div className="mb-6">
-              <label htmlFor="role" className="block text-sm font-medium text-gray-700">Role</label>
+              <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+                Role
+              </label>
               <select
                 id="role"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
@@ -125,9 +141,9 @@ const Signup = () => {
           </form>
           <p className="mt-4 text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <a href="/login" className="text-green-600 hover:underline">
+            <Link to="/login" className="text-green-600 hover:underline">
               Login here
-            </a>
+            </Link>
           </p>
         </div>
       </div>
