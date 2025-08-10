@@ -63,68 +63,103 @@ const Signup = () => {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "40px auto", padding: "20px", border: "1px solid #ccc", borderRadius: "8px" }}>
-      <h2 style={{ textAlign: "center" }}>Create a New Account</h2>
+    <div style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "#f5f5f5"
+    }}>
+      <div style={{
+        maxWidth: "500px",
+        width: "100%",
+        padding: "20px",
+        background: "#fff",
+        border: "1px solid #ccc",
+        borderRadius: "8px",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+      }}>
+        <h2 style={{ textAlign: "center" }}>Create a New Account</h2>
 
-      {successMsg && <div style={{ color: "green", marginBottom: "15px", textAlign: "center" }}>{successMsg}</div>}
-      {errorMsg && <div style={{ color: "red", marginBottom: "15px", textAlign: "center" }}>{errorMsg}</div>}
+        {successMsg && <div style={{ color: "green", marginBottom: "15px", textAlign: "center" }}>{successMsg}</div>}
+        {errorMsg && <div style={{ color: "red", marginBottom: "15px", textAlign: "center" }}>{errorMsg}</div>}
 
-      <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-        <label>Full Name</label>
-        <input
-          type="text"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          style={{ padding: "8px", borderRadius: "4px", border: errors.fullName ? "1px solid red" : "1px solid #aaa" }}
-          required
-        />
-        {errors.fullName && <p style={{ color: "red", margin: "0" }}>{errors.fullName}</p>}
+        <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <label>Full Name</label>
+          <input
+            type="text"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            style={{ padding: "8px", borderRadius: "4px", border: errors.fullName ? "1px solid red" : "1px solid #aaa" }}
+            required
+          />
+          {errors.fullName && <p style={{ color: "red", margin: "0" }}>{errors.fullName}</p>}
 
-        <label>Username</label>
-        <input
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          style={{ padding: "8px", borderRadius: "4px", border: errors.userName ? "1px solid red" : "1px solid #aaa" }}
-          required
-        />
-        {errors.userName && <p style={{ color: "red", margin: "0" }}>{errors.userName}</p>}
+          <label>Username</label>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            style={{ padding: "8px", borderRadius: "4px", border: errors.userName ? "1px solid red" : "1px solid #aaa" }}
+            required
+          />
+          {errors.userName && <p style={{ color: "red", margin: "0" }}>{errors.userName}</p>}
 
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ padding: "8px", borderRadius: "4px", border: errors.email ? "1px solid red" : "1px solid #aaa" }}
-          required
-        />
-        {errors.email && <p style={{ color: "red", margin: "0" }}>{errors.email}</p>}
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ padding: "8px", borderRadius: "4px", border: errors.email ? "1px solid red" : "1px solid #aaa" }}
+            required
+          />
+          {errors.email && <p style={{ color: "red", margin: "0" }}>{errors.email}</p>}
 
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ padding: "8px", borderRadius: "4px", border: errors.password ? "1px solid red" : "1px solid #aaa" }}
-          required
-        />
-        {errors.password && <p style={{ color: "red", margin: "0" }}>{errors.password}</p>}
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ padding: "8px", borderRadius: "4px", border: errors.password ? "1px solid red" : "1px solid #aaa" }}
+            required
+          />
+          <ul style={{ fontSize: "13px", margin: "5px 0", paddingLeft: "20px" }}>
+            <li style={{ color: pwdRules.hasUpper ? "green" : "red" }}>At least one uppercase letter</li>
+            <li style={{ color: pwdRules.hasLower ? "green" : "red" }}>At least one lowercase letter</li>
+            <li style={{ color: pwdRules.hasNumber ? "green" : "red" }}>At least one number</li>
+            <li style={{ color: pwdRules.hasSpecial ? "green" : "red" }}>At least one special character</li>
+            <li style={{ color: pwdRules.minLength ? "green" : "red" }}>Minimum 8 characters</li>
+          </ul>
+          {errors.password && <p style={{ color: "red", margin: "0" }}>{errors.password}</p>}
 
-        <label>Role</label>
-        <select value={role} onChange={(e) => setRole(e.target.value)} style={{ padding: "8px", borderRadius: "4px", border: "1px solid #aaa" }}>
-          <option value="Student">Student</option>
-          <option value="Instructor">Instructor</option>
-          <option value="Admin">Admin</option>
-        </select>
+          <label>Role</label>
+          <select value={role} onChange={(e) => setRole(e.target.value)} style={{ padding: "8px", borderRadius: "4px", border: "1px solid #aaa" }}>
+            <option value="Student">Student</option>
+            <option value="Instructor">Instructor</option>
+            <option value="Admin">Admin</option>
+          </select>
 
-        <button type="submit" style={{ padding: "10px", backgroundColor: "#4f46e5", color: "white", border: "none", borderRadius: "4px", fontWeight: "bold", cursor: "pointer" }}>
-          Create Account
-        </button>
-      </form>
+          <button type="submit" style={{
+            padding: "10px",
+            backgroundColor: "#4f46e5",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            fontWeight: "bold",
+            cursor: "pointer"
+          }}>
+            Create Account
+          </button>
+        </form>
 
-      <p style={{ marginTop: "20px", textAlign: "center" }}>
-        Already have an account? <Link to="/">Login here</Link>
-      </p>
+        <p style={{ marginTop: "20px", textAlign: "center" }}>
+          Already have an account? <Link to="/">Login here</Link>
+        </p>
+      </div>
     </div>
   );
 };
